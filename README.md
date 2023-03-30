@@ -57,7 +57,7 @@ The Blog app will be a classic example of a blog website. It is a Microverse pro
 
 To get a local copy up and running, follow these steps.
 
-- gem install bundler
+- gem install bundler.
 
 ### Prerequisites
 
