@@ -2,7 +2,8 @@ require 'rails_helper'
 
 RSpec.describe Like, type: :model do
   user = User.create(name: 'Grabrielle', photo: 'mybaby.png', bio: 'A beautiful baby', post_counter: 0)
-  post = Post.create(user_id: author.id, title: 'Hello', text: 'This is my first post', likes_counter: 0,
+  put user
+  post = Post.create(user_id: user.id, title: 'Hello', text: 'This is my first post', likes_counter: 0,
                      comments_counter: 0)
 
   like = Like.new(post_id: post.id, user_id: user.id)
