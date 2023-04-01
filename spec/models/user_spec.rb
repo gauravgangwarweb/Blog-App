@@ -1,29 +1,30 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  subject { User.new(name: 'Grabrielle', photo: 'mybaby.png', bio: 'A beautiful baby', post_counter: 0) }
-  before { subject.save }
-
-  it 'name should be present' do
-    subject.name = nil
-    expect(subject).to_not be_valid
+  before(:example) do
+    @user = User.create(name: 'John Doe', photo: 'live to photo', bio: 'live to bio', posts_counter: 0)
   end
 
-  it 'post_counter should be numeric' do
-    subject.post_counter = ''
-    expect(subject).to_not be_valid
+  it 'name is invalid' do
+    @user.name = nil
+    expect(@user).to_not be_valid
   end
 
-  it 'post_counter should be greater than or equal to 0' do
-    subject.post_counter = -1
-    expect(subject).to_not be_valid
+  it 'posts_counter is invalid' do
+    @user.posts_counter = 'asdasdasd'
+    expect(@user).to_not be_valid
   end
 
-  it 'most_recent_posts should return 0 post' do
-    expect(subject.most_recent_posts.length).to eq 0
+  it 'post counter is integer' do
+    @user.posts_counter = -1
+    expect(@user).to_not be_valid
   end
 
-  it 'most_recent_posts should always return a total number of 3 comments' do
-    expect(subject.most_recent_posts).to eq(subject.posts.last(3))
+  it 'recent_posts should return 3 posts' do
+    Post.create(title: 'title', text: 'content', author: @user, comments_counter: 0, likes_counter: 0)
+    Post.create(title: 'title_1', text: 'content_1', author: @user, comments_counter: 0, likes_counter: 0)
+    Post.create(title: 'title_2', text: 'content_2', author: @user, comments_counter: 0, likes_counter: 0)
+    Post.create(title: 'title_3', text: 'content_3', author: @user, comments_counter: 0, likes_counter: 0)
+    expect(@user.recent_posts.count).to eq(3)
   end
 end

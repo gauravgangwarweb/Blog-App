@@ -1,23 +1,22 @@
 require 'rails_helper'
 
 RSpec.describe Comment, type: :model do
-  user = User.create(name: 'Grabrielle', photo: 'mybaby.png', bio: 'A beautiful baby', post_counter: 0)
-  post = Post.create(user_id: user.id, title: 'Hello', text: 'This is my first post', likes_counter: 0,
-                     comments_counter: 0)
-
-  comment = Comment.new(post_id: post.id, user_id: user.id, text: 'Hi Tom!')
-  comment.save
-
-  it 'When user add a comment on a post, it should return a total number of 1 comment for that post' do
-    expect(user.comments.length).to eq 1
+  before(:example) do
+    @user = User.create(name: 'John Doe', photo: 'live to photo', bio: 'live to bio', posts_counter: 0)
+    @post = Post.create(title: 'title', text: 'content', author: @user, comments_counter: 0, likes_counter: 0)
+    @comment = Comment.create(text: 'comment', post: @post, author: @user)
   end
 
-  it 'post comment count should be 0' do
-    expect(post.comments_counter).to eq 0
+  it 'have correct user' do
+    expect(@comment.author_id).to eq(@user.id)
   end
 
-  it 'update_comments_posts_counter should increment the total comments by 1' do
-    comment.update_comments_posts_counter
-    expect(comment.post.comments_counter).to eq 1
+  it 'have correct post' do
+    expect(@comment.post_id).to eq(@post.id)
+  end
+
+  it 'test if comment counter is updated' do
+    Comment.create(text: 'comment_1', post: @post, author: @user)
+    expect(@post.comments_counter).to eq 2
   end
 end

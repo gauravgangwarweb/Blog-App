@@ -1,24 +1,21 @@
 require 'rails_helper'
 
 RSpec.describe Like, type: :model do
-  user = User.create(name: 'Grabrielle', photo: 'mybaby.png', bio: 'A beautiful baby', post_counter: 0)
-  put user
-  post = Post.create(user_id: user.id, title: 'Hello', text: 'This is my first post', likes_counter: 0,
-                     comments_counter: 0)
-
-  like = Like.new(post_id: post.id, user_id: user.id)
-  like.save
-
-  it 'When user like a post, it should return a total number of 1 like for that post' do
-    expect(user.likes.length).to eq 1
+  before(:example) do
+    @user = User.create(name: 'John Doe', photo: 'live to photo', bio: 'live to bio', posts_counter: 0)
+    @post = Post.create(title: 'title', text: 'content', author: @user, comments_counter: 0, likes_counter: 0)
+    @like = Like.create(post: @post, author: @user)
   end
 
-  it 'post like count should be 0' do
-    expect(post.likes_counter).to eq 0
+  it 'have correct user' do
+    expect(@like.author_id).to eq(@user.id)
   end
 
-  it 'update_posts_likes_counter should increment the total likes by 1' do
-    like.update_posts_likes_counter
-    expect(like.post.likes_counter).to eq 1
+  it 'have correct post' do
+    expect(@like.post_id).to eq(@post.id)
+  end
+
+  it 'test if like counter is updated' do
+    expect(@post.likes_counter).to eq 1
   end
 end
