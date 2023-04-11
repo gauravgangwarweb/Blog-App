@@ -18,7 +18,7 @@ class PostsController < ApplicationController
 
   def create
     @user = current_user
-    @post = @user.posts.new(posts_params)
+    @post = @user.posts.new(author: @user, title: params[:post][:title], text: params[:post][:text])
 
     if @post.save
       @post.update_post_counter
@@ -26,11 +26,5 @@ class PostsController < ApplicationController
     else
       render :new, status: :unprocessable_entity
     end
-  end
-
-  private
-
-  def posts_params
-    params.require(:posts).permit(:title, :text)
   end
 end
