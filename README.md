@@ -82,6 +82,12 @@ Clone this repository to your desired folder:
 - Twitter: [@twitterhandle](https://twitter.com/GauravGangwar51)
 - LinkedIn: [LinkedIn](https://linkedin.com/in/gauravgangwarweb)
 
+👤 **Mulugeta**
+
+- GitHub: [@githubhandle](https://github.com/belmeetmule)
+- Twitter: [@twitterhandle](https://twitter.com/belmeetmule)
+- LinkedIn: [LinkedIn](https://www.linkedin.com/in/mulugeta-belete/)
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## ﻿🔮﻿ Future Feature <a name="futurefeature"></a>
