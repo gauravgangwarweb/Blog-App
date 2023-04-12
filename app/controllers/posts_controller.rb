@@ -5,7 +5,7 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = Post.find(params[:id])
+    @post = Post.includes(:author).find(params[:id])
     @user = User.find(params[:user_id])
     @comments = @post.comments
     @likes = @post.likes
@@ -18,19 +18,15 @@ class PostsController < ApplicationController
 
   def create
     @user = current_user
-    @post = @user.posts.new(posts_params)
+    @post = @user.posts.new(author: @user, title: params[:post][:title], text: params[:post][:text])
 
     if @post.save
       @post.update_post_counter
-      redirect_to @post
+      flash[:notice] = 'Your post was created successfully'
+      redirect_to user_post_path(@user, @post)
     else
-      render :new, status: :unprocessable_entity
+      flash.alert = 'sorry, something went wrong!'
+      render :new
     end
-  end
-
-  private
-
-  def posts_params
-    params.require(:posts).permit(:title, :text)
   end
 end
