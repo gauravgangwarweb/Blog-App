@@ -135,7 +135,7 @@ footer {
   right: 0;
   font-size: 1rem;
   margin: 0.3em 0;
-  background-color: #272a31;
+  background-color: #0648e4;
   filter: grayscale(100%) contrast(30%);
   color: #fff;
 }
@@ -190,4 +190,12 @@ ul {
 
 .comment {
   width: 100%;
+}
+
+.bg-blue {
+  background-color: #0648e4;
+}
+
+.box-shadow {
+  box-shadow: rgba(60, 64, 67, 0.3) 0 1px 2px 0, rgba(60, 64, 67, 0.15) 0 2px 6px 2px;
 }
