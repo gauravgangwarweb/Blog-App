@@ -5,7 +5,7 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = Post.find(params[:id])
+    @post = Post.includes(:author).find(params[:id])
     @user = User.find(params[:user_id])
     @comments = @post.comments
     @likes = @post.likes
@@ -22,9 +22,11 @@ class PostsController < ApplicationController
 
     if @post.save
       @post.update_post_counter
-      redirect_to @post
+      flash[:notice] = 'Your post was created successfully'
+      redirect_to user_post_path(@user, @post)
     else
-      render :new, status: :unprocessable_entity
+      flash.alert = 'sorry, something went wrong!'
+      render :new
     end
   end
 end
