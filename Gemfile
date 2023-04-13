@@ -80,3 +80,5 @@ end
 gem 'rails-controller-testing'
 
 gem 'bullet', group: 'development'
+
+gem 'devise'

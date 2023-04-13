@@ -4,7 +4,6 @@ body {
 
 header {
   width: 100%;
-  padding: 1.5rem;
 }
 
 header nav ul li a {
@@ -13,6 +12,12 @@ header nav ul li a {
 
 header nav ul li a span.logo {
   font-size: 2rem;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .d-flex {
@@ -130,9 +135,13 @@ footer {
   right: 0;
   font-size: 1rem;
   margin: 0.3em 0;
-  background-color: #272a31;
+  background-color: #0648e4;
   filter: grayscale(100%) contrast(30%);
   color: #fff;
+}
+
+ul {
+  padding-left: 0;
 }
 
 .fs-sm {
@@ -141,6 +150,7 @@ footer {
 
 .mb-section {
   margin-bottom: 4rem;
+  width: 100%;
 }
 
 .post-detail {
@@ -180,4 +190,12 @@ footer {
 
 .comment {
   width: 100%;
+}
+
+.bg-blue {
+  background-color: #0648e4;
+}
+
+.box-shadow {
+  box-shadow: rgba(60, 64, 67, 0.3) 0 1px 2px 0, rgba(60, 64, 67, 0.15) 0 2px 6px 2px;
 }
