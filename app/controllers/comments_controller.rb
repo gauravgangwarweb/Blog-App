@@ -16,14 +16,15 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    @comment = Comment.include(:author, :post).find(params[:id])
-    user = @comment.user
-    post = @comment.post
+    @comment = Comment.includes(:author, :post).find(params[:id])
+    user = @comment.author_id
+    post = @comment.post_id
+
 
     if @comment.destroy
-      flash[:success] = "Comment was successfully deleted."
+      flash[:success] = 'Comment was successfully deleted.'
     else
-      flash[:error] = "Error: Comment could not be deleted"
+      flash[:error] = 'Error: Comment could not be deleted'
     end
     redirect_to user_post_path(user, post)
   end

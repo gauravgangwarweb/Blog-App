@@ -31,3 +31,9 @@
 <button class="see-all-post d-flex border">
     <%= link_to "Create new comment", new_user_post_comment_path(@user, @post) %>
 </button>
+
+<% if can? :destroy, @post %>
+                <%= form_with url: user_post_path(@user, @post), method: :delete, data: { confirm: 'Are you sure?' } do %>
+                  <button class="delete-button">Delete</button>
+                <% end %>
+      <% end %>

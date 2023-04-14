@@ -14,7 +14,7 @@ class UsersController < ApplicationController
     user.posts.destroy_all
     if user.destroy
       flash[:success] = 'User deleted successfully'
-      redirect_to users_path()
+      redirect_to users_path
     else
       flash.now[:error] = 'Error: User could not be deleted'
       redirect_to user_path(user)

@@ -6,51 +6,55 @@
 
     <div class="user-show user-bdy d-flex">
       <div class="show-pc user-pc d-flex">
-        <h2 class="fs-sm"><%= @user.name %></h2>
-        <p class="post-count">Number of posts: <%= @user.posts_counter || 0 %></p>
+        <h2 class="fs-sm">
+          <%= @user.name %>
+        </h2>
+        <p class="post-count">Number of posts: <%= @user.posts_counter || 0 %>
+        </p>
       </div>
     </div>
   </div>
 
   <div class="user-bio_div border mb-sm">
     <h3>Bio</h3>
-    <p><%= @user.bio%></p>
+    <p>
+      <%= @user.bio%>
+    </p>
   </div>
 
   <div class="">
     <ul class="user-post-cont d-flex-2">
       <% @user.recent_posts.each_with_index do |post, index| %>
         <li class="user-post-li user-bio_div border mb-sm d-flex-2">
-        <a href=<%=user_post_path(@user, post)%>>
-          <h3>Post #<%= index + 1 %> </h3>
-          <p><%= post.text %></p>
-          <div class="sp_div d-flex">
-          <span class="comments mr-sm">Comments: <%= post.comments_counter || 0 %>, </span>
-          <span class="likes">Likes:<%= post.likes_counter || 0 %></span>
-          </div>
-        </a>
+          <a href=<%=user_post_path(@user, post)%>>
+            <h3>Post #<%= index + 1 %>
+            </h3>
+            <p>
+              <%= post.text %>
+            </p>
+            <div class="sp_div d-flex">
+              <span class="comments mr-sm">Comments: <%= post.comments_counter || 0 %>, </span>
+              <span class="likes">Likes:<%= post.likes_counter || 0 %></span>
+            </div>
+          </a>
         </li>
-        
-        <% if can? :destroy, post %>
-            <%= form_with url: user_post_path(@user, post), method: :delete do %>
-              <button class="see-all-post d-flex border">Delete</button>
-            <% end %>
-          <% end %>
       <% end %>
+
     </ul>
   </div>
 
   <button class="see-all-post d-flex border">
-    <%= link_to "see all post", user_posts_path(@user) %>
+    <%= link_to "see all post" , user_posts_path(@user) %>
   </button>
-    <%if @user.id == current_user.id || current_user.role == 'admin'%>
-<button class="see-all-post d-flex border">
-    <%= link_to "Create post", new_user_post_path(@user) %>
-</button>
-<% if can? :destroy, @user %>
-              <%= form_with url: user_path(@user.id), method: :delete do %>
-                <button class="see-all-post d-flex border">Delete</button>
-              <% end %>
-            <% end %>
-<%end%>
+  <%if @user.id==current_user.id || current_user.role=='admin' %>
+    <button class="see-all-post d-flex border">
+      <%= link_to "Create post" , new_user_post_path(@user) %>
+    </button>
+  <%end%>
+
+    <% if can? :destroy, @user %>
+      <%= form_with url: user_path(@user.id), method: :delete do %>
+        <button class="see-all-post d-flex border">Delete</button>
+      <% end %>
+    <% end %>
 </section>

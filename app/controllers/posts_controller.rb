@@ -21,7 +21,7 @@ class PostsController < ApplicationController
   def create
     @user = current_user
     @post = Post.new(post_params)
-    @post.author= @user
+    @post.author = @user
 
     if @post.save
       @post.update_post_counter
@@ -40,10 +40,10 @@ class PostsController < ApplicationController
     post.likes.destroy_all
     if post.destroy
       flash[:success] = 'Post deleted successfully'
-      redirect_to user_posts_path(@user)
+      redirect_to users_path
     else
       flash.now[:error] = 'Error: Post could not be deleted'
-      redirect_to user_post_path(@user, post)
+      redirect_to users_path
     end
   end
 

@@ -6,14 +6,14 @@ class Ability
       can :manage, :all
     else
       can :read, :all
-      can :manage, Post, user_id: user.id
-      can :manage, Comment, user_id: user.id
+      can :manage, Post, author_id: user.id
+      can :manage, Comment, author_id: user.id
       can :create, Like
       can :destroy, Post do |post|
-        post.user_id == user.id
+        post.author_id == user.id
       end
       can :destroy, Comment do |comment|
-        comment.user_id == user.id
+        comment.author_id == user.id
       end
     end
   end
