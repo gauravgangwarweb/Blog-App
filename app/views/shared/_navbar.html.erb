@@ -7,6 +7,9 @@
       <% if user_signed_in? %>
         <li class="navbar-brand fs-6"> Welcome <span style="">
             <%= current_user.name.capitalize %>!
+            <% if current_user.role == "admin" %>
+              <p class="text-danger">Admin</p>
+            <% end %>
           </span></li>
         <li class="navbar-brand fs-6">
           <%= button_to "Log Out" , destroy_user_session_path, method: :delete, class: "btn btn-outline-secondary " %>
